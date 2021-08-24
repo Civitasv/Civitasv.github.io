@@ -170,29 +170,41 @@ public static class Merge {
 算法实现：
 
 ```java
-public static class Quick {
-    public static void sort(Comparable[] arr) {
-        sort(arr, 0, arr.length - 1);
-    }
-
-    public static void sort(Comparable[] arr, int lo, int hi) {
-        if (lo >= hi) return;
-        int j = partition(arr, lo, hi); // 切分 左边均小于a[j] 右边均大于a[j]
-        sort(arr, lo, j - 1);
-        sort(arr, j + 1, hi);
-    }
-
-    private static int partition(Comparable[] arr, int lo, int hi) {
-        int i = lo, j = hi + 1;
-        Comparable v = arr[lo]; // 切分元素
-        while (true) {
-            while (less(arr[++i], v)) if (i == hi) break;
-            while (less(v, arr[--j])) if (j == lo) break;
-            if (i >= j) break;
-            exch(arr, i, j);
-        }
-        exch(arr, lo, j);
-        return j;
-    }
+private static void sort(int[] arr) {
+    sort(arr, 0, arr.length - 1);
 }
+
+private static void sort(int[] arr, int start, int end) {
+    if (start >= end) {
+        return;
+    }
+
+    // partition
+    int index = partition(arr, start, end);
+
+    // sort left
+    sort(arr, start, index - 1);
+    // sort right
+    sort(arr, index + 1, end);
+}
+
+private static int partition(int[] arr, int start, int end) {
+    int partition = arr[end]; // 使用该数据作为分割
+    int counter = start; // counter 左侧为所有小于 partition 的数据
+
+    for (int i = start; i < end; i++) {
+        if (arr[i] < partition) { // 移动到左侧
+            exch(arr, i, counter++);
+        }
+    }
+    exch(arr, end, counter);
+    return counter;
+}
+
+private static void exch(int[] arr, int a, int b) {
+    int temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
+}
+
 ```
