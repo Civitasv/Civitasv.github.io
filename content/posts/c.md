@@ -6,4 +6,4 @@ draft: false
 
 ## Intro
 
-I'm learning C.
+C is hard, But I'm learning it.
