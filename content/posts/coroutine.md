@@ -352,3 +352,7 @@ int main()
 	return 0;
 }
 ```
+
+## 其他阅读
+
+- [Javascript 中 Promise, Async, Await](https://zhuanlan.zhihu.com/p/148462034)
