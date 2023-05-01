@@ -1,6 +1,6 @@
 baseURL = 'http://example.org/'
 languageCode = 'en-us'
-title = 'My New Hugo Site'
+title = 'Learning C'
 theme = "terminal"
 paginate = 5
 disqusShortname = "civitasv"
@@ -65,7 +65,7 @@ disqusShortname = "civitasv"
 [languages]
   [languages.en]
     languageName = "English"
-    title = "C is the Best"
+    title = "C Resources"
     subtitle = "My Learning On C Language"
     owner = "Civitasv"
     keywords = "Blog"
@@ -73,15 +73,15 @@ disqusShortname = "civitasv"
     missingBackButtonLabel = "Back to home page"
 
     [languages.en.params.logo]
-      logoText = "Terminal"
+      logoText = "The C Language"
       logoHomeLink = "/"
 
     [languages.en.menu]
       [[languages.en.menu.main]]
+        identifier = "home"
+        name = "Home"
+        url = "/"
+      [[languages.en.menu.main]]
         identifier = "about"
         name = "About"
         url = "/about"
-      [[languages.en.menu.main]]
-        identifier = "showcase"
-        name = "Showcase"
-        url = "/showcase"
