@@ -1,5 +1,5 @@
-baseURL = 'http://example.org/'
-languageCode = 'en-us'
+variablesbaseURL = 'http://example.org/'
+languageCode = 'zh-cn'
 title = 'Learning C'
 theme = "terminal"
 paginate = 5
@@ -11,10 +11,13 @@ disqusShortname = "civitasv"
   contentTypeName = "posts"
 
   # ["orange", "blue", "red", "green", "pink"]
-  themeColor = "orange"
+  themeColor = "blue"
+  
+  # ["light", "dark"]
+  bg = "light"
 
   # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 2
+  showMenuItems = 10
 
   # show selector to switch language
   showLanguageSelector = false
@@ -78,10 +81,19 @@ disqusShortname = "civitasv"
 
     [languages.en.menu]
       [[languages.en.menu.main]]
-        identifier = "home"
-        name = "Home"
+        identifier = "linux_driver"
+        name = "Driver"
         url = "/"
       [[languages.en.menu.main]]
         identifier = "about"
         name = "About"
         url = "/about"
+      [[languages.en.menu.main]]
+        identifier = "unix_programming"
+        name = "Unix"
+        url = "/unix_programming"
+      [[languages.en.menu.main]]
+        identifier = "webserver"
+        name = "Webserver"
+        url = "/webserver"
+
