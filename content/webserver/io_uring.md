@@ -42,44 +42,44 @@ io_uring 设计了一对共享的 ring buffer 用于应用和内核之间的通�
 
 ```c
 struct io_uring_params {
-	__u32 sq_entries;
-	__u32 cq_entries;
-	__u32 flags;
-	__u32 sq_thread_cpu;
-	__u32 sq_thread_idle;
-	__u32 features;
-	__u32 wq_fd;
-	__u32 resv[3];
-	struct io_sqring_offsets sq_off;
-	struct io_cqring_offsets cq_off;
+  __u32 sq_entries;
+  __u32 cq_entries;
+  __u32 flags;
+  __u32 sq_thread_cpu;
+  __u32 sq_thread_idle;
+  __u32 features;
+  __u32 wq_fd;
+  __u32 resv[3];
+  struct io_sqring_offsets sq_off;
+  struct io_cqring_offsets cq_off;
 };
 ```
 
 ```c
 struct io_sqring_offsets {
-	__u32 head;
-	__u32 tail;
-	__u32 ring_mask;
-	__u32 ring_entries;
-	__u32 flags;
-	__u32 dropped;
-	__u32 array;
-	__u32 resv1;
-	__u64 resv2;
+  __u32 head;
+  __u32 tail;
+  __u32 ring_mask;
+  __u32 ring_entries;
+  __u32 flags;
+  __u32 dropped;
+  __u32 array;
+  __u32 resv1;
+  __u64 resv2;
 };
 ```
 
 ```c
 struct io_cqring_offsets {
-	__u32 head;
-	__u32 tail;
-	__u32 ring_mask;
-	__u32 ring_entries;
-	__u32 overflow;
-	__u32 cqes;
-	__u32 flags;
-	__u32 resv1;
-	__u64 resv2;
+  __u32 head;
+  __u32 tail;
+  __u32 ring_mask;
+  __u32 ring_entries;
+  __u32 overflow;
+  __u32 cqes;
+  __u32 flags;
+  __u32 resv1;
+  __u64 resv2;
 };
 ```
 
@@ -131,7 +131,7 @@ int io_uring_register(unsigned int fd, unsigned int opcode,
 1. 使用 io_uring_setup 和 mmap 设置共享 buffer，在内核态和用户态共享 SQ 和 CQ。在用户态构造 SQE 插入到 SQ 以提交 I/O 请求，在内核态将 I/O 请求结果添加到 CQ
 2. 对于每个 I/O 请求，需要构造 SQE 描述该 I/O 请求，然后将它添加到 SQ 的末尾
 3. 添加 SQE 之后，需要调用 io_uring_enter 告诉内核处理该 I/O 请求
-4. 内核处理完成该 I/O 请求后，会构造 CQE 添加到 CQ 的末尾，用户态获取 CQE 之后，通过检查 _res_ 的值，可以得到 I/O 请求的结果
+4. 内核处理完成该 I/O 请求后，会构造 CQE 添加到 CQ 的末尾，用户态获取 CQE 之后，通过检查 *res* 的值，可以得到 I/O 请求的结果
 
 - You add SQEs to the tail of the SQ. The kernel reads SQEs off the head of the queue.
 - The kernel adds CQEs to the tail of the CQ. You read CQEs off the head of the queue.
@@ -165,8 +165,8 @@ io_uring 利用在内核态和用户态共享的 SQ 和 CQ 达到了零拷贝。
     // 启用IORING_FEAT_FAST_POLL特性标志后，io_uring机制会使用快速轮询模式来
     // 处理文件描述符上的事件。高版本下这是自动设置的。
     if (!(params.features & IORING_FEAT_FAST_POLL)) {
-        printf("IORING_FEAT_FAST_POLL not available in the kernel, quiting...\n");
-        exit(0);
+      printf("IORING_FEAT_FAST_POLL not available in the kernel, quiting...\n");
+      exit(0);
     }
 ```
 
@@ -180,7 +180,7 @@ io_uring 利用在内核态和用户态共享的 SQ 和 CQ 达到了零拷贝。
 
 ## reference
 
-1. https://unixism.net/loti/what_is_io_uring.html
-2. https://zhuanlan.zhihu.com/p/380726590
-3. https://man.archlinux.org/man/io_uring_setup.2.en
-4. pdf: https://kernel.dk/io_uring.pdf
+1. <https://unixism.net/loti/what_is_io_uring.html>
+2. <https://zhuanlan.zhihu.com/p/380726590>
+3. <https://man.archlinux.org/man/io_uring_setup.2.en>
+4. pdf: <https://kernel.dk/io_uring.pdf>

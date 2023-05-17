@@ -15,7 +15,7 @@ color = "blue" #color from the theme settings
 
 ## 调研
 
-### 1. From http://wiki.c2.com/?CoRoutine
+### 1. From <http://wiki.c2.com/?CoRoutine>
 
 Coroutines are very important as one of the very few examples of a form of concurrency that is useful, and yet constrained enough to completely avoid the typical difficulties (race conditions, deadlock, etc).
 
@@ -31,7 +31,7 @@ int coroutine Generate123() {
 }
 
 main() {
-    printf("%d\n", Generate123());	/* prints "1" */
+    printf("%d\n", Generate123()); /* prints "1" */
     printf("%d\n", resume Generate123()); /* prints "2" */
     printf("%d\n", resume Generate123()); /* prints "3" */
 }
@@ -41,40 +41,40 @@ main() {
 
 {{< youtube MuCpdoIEpgA >}}
 
-### 3. From https://www.csl.mtu.edu/cs4411.ck/www/NOTES/non-local-goto/coroutine.html
+### 3. From <https://www.csl.mtu.edu/cs4411.ck/www/NOTES/non-local-goto/coroutine.html>
 
 单线程并发执行 `Ping` 和 `Pong`:
 
 {{< code language="c" title="简单的协程实现（无上下文切换）" id="1" expand="Show" collapse="Hide" isCollapsed="true" >}}
-/_ ---------------------------------------------------------------- _/
-/_ PROGRAM pingpong : _/
-/_ This program uses setjmp() and longjmp() to implement an _/
-/_ example of coroutine. _/
-/_ ---------------------------------------------------------------- _/
+/_----------------------------------------------------------------_/
+/_PROGRAM pingpong :_/
+/_This program uses setjmp() and longjmp() to implement an_/
+/_example of coroutine._/
+/_----------------------------------------------------------------_/
 
-#include <stdio.h>
-#include <setjmp.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <setjmp.h>
+# include <stdlib.h>
 
-int max_iteration; /_ the max # of iterations _/
-int iter; /_ global iteration counter _/
+int max_iteration; /_the max # of iterations_/
+int iter; /_global iteration counter_/
 
-jmp_buf Main; /_ jump back to main() _/
-jmp_buf PointA; /_ jump buffer in Ping() _/
-jmp_buf PointB; /_ jump buffer in Pong() _/
+jmp_buf Main; /_jump back to main()_/
+jmp_buf PointA; /_jump buffer in Ping()_/
+jmp_buf PointB; /_jump buffer in Pong()_/
 
-/_ ---------------------------------------------------------------- _/
-/_ Function Prototypes _/
-/_ ---------------------------------------------------------------- _/
+/_----------------------------------------------------------------_/
+/_Function Prototypes_/
+/_----------------------------------------------------------------_/
 
 void Ping(void);
 void Pong(void);
 
-/_ ---------------------------------------------------------------- _/
-/_ The main program starts here _/
-/_ ---------------------------------------------------------------- _/
+/_----------------------------------------------------------------_/
+/_The main program starts here_/
+/_----------------------------------------------------------------_/
 
-int main(int argc, char* argv[])
+int main(int argc, char*argv[])
 {
     if (argc != 2) { /* check # of arguments _/
         printf("Use %s max-#-of-lines\n", argv[0]);
@@ -89,42 +89,42 @@ int main(int argc, char* argv[])
     longjmp(PointA, 1); /_ ok, jump to Ping() \*/
 }
 
-/_ ---------------------------------------------------------------- _/
-/_ FUNCTION Ping : _/
-/_ This function marks a return point when it is initialized. _/
-/_ Then, it starts a loop and jump back and forth between itself _/
-/_ and function Pong() using jump buffers. _/
-/_ ---------------------------------------------------------------- _/
+/_----------------------------------------------------------------_/
+/_FUNCTION Ping :_/
+/_This function marks a return point when it is initialized._/
+/_Then, it starts a loop and jump back and forth between itself_/
+/_and function Pong() using jump buffers._/
+/_----------------------------------------------------------------_/
 
 void Ping(void)
 {
-    if (setjmp(PointA) == 0) /_ set a return mark _/
-        longjmp(Main, 1); /_ jump back to main _/
-    while (1) { /_ main will jump to here _/
-	    printf("%3d : Ping-", iter); /_ display Ping _/
-        if (setjmp(PointA) == 0) /_ set a return mark _/
-            longjmp(PointB, 1); /_ jump to Pong() _/
+    if (setjmp(PointA) == 0) /_set a return mark_/
+        longjmp(Main, 1); /_jump back to main_/
+    while (1) { /_main will jump to here_/
+     printf("%3d : Ping-", iter); /_display Ping_/
+        if (setjmp(PointA) == 0) /_set a return mark_/
+            longjmp(PointB, 1); /_jump to Pong()_/
     }
 }
 
-/_ ---------------------------------------------------------------- _/
-/_ FUNCTION Pong : _/
-/_ This function marks a return point when it is initialized. _/
-/_ Then, it starts a loop and jump back and forth between itself _/
-/_ and function Ping() using jump buffers. _/
-/_ ---------------------------------------------------------------- _/
+/_----------------------------------------------------------------_/
+/_FUNCTION Pong :_/
+/_This function marks a return point when it is initialized._/
+/_Then, it starts a loop and jump back and forth between itself_/
+/_and function Ping() using jump buffers._/
+/_----------------------------------------------------------------_/
 
 void Pong(void)
 {
-    if (setjmp(PointB) == 0) /_ set a return mark _/
-        longjmp(Main, 1); /_ jump back to main _/
-    while (1) { /_ main will jump to here _/
-        printf("Pong\n"); /_ display Pong _/
-        iter++; /_ increase iteration count _/
-        if (iter > max_iteration) /_ should I stop? _/
-            exit(0); /_ yes, then exit _/
-        if (setjmp(PointB) == 0) /_ no, set a return mark _/
-            longjmp(PointA, 1); /_ then jump to Ping() _/
+    if (setjmp(PointB) == 0) /_set a return mark_/
+        longjmp(Main, 1); /_jump back to main_/
+    while (1) { /_main will jump to here_/
+        printf("Pong\n"); /_display Pong_/
+        iter++; /_increase iteration count_/
+        if (iter > max_iteration) /_should I stop?_/
+            exit(0); /_yes, then exit_/
+        if (setjmp(PointB) == 0) /_no, set a return mark_/
+            longjmp(PointA, 1); /_then jump to Ping()_/
     }
 }
 {{< /code >}}
@@ -182,7 +182,7 @@ typedef struct {
 
 创建上下文。
 
-#### swapcontext(ucontext_t *oucp, ucontext_t *ucp)
+#### swapcontext(ucontext_t \*oucp, ucontext_t \*ucp)
 
 将当前运行状态存储到 oucp 中，然后将控制权转移到 ucp 中。
 
@@ -191,12 +191,12 @@ typedef struct {
 ```c
 void context_switching()
 {
-	ucontext_t ctx = {0};
+  ucontext_t ctx = {0};
 
-	getcontext(&ctx); // store context
-	printf("Context switching example\n");
-	sleep(1);
-	setcontext(&ctx); // jump to location of ctx
+  getcontext(&ctx); // store context
+  printf("Context switching example\n");
+  sleep(1);
+  setcontext(&ctx); // jump to location of ctx
 }
 ```
 
@@ -205,23 +205,23 @@ void context_switching()
 ```c
 void control_flow()
 {
-	uint32_t var = 0;
-	ucontext_t ctx = { 0 }, back = { 0 };
+  uint32_t var = 0;
+  ucontext_t ctx = { 0 }, back = { 0 };
 
-	getcontext(&ctx); // 1. store current context in ctx
+  getcontext(&ctx); // 1. store current context in ctx
 
-	ctx.uc_stack.ss_sp = calloc(1, MINSIGSTKSZ);
-	ctx.uc_stack.ss_size = MINSIGSTKSZ;
-	ctx.uc_stack.ss_flags = 0;
+  ctx.uc_stack.ss_sp = calloc(1, MINSIGSTKSZ);
+  ctx.uc_stack.ss_size = MINSIGSTKSZ;
+  ctx.uc_stack.ss_flags = 0;
 
-	ctx.uc_link = &back;
+  ctx.uc_link = &back;
 
-	makecontext(&ctx, (void (*)())another, 2, &var, 100);
+  makecontext(&ctx, (void (*)())another, 2, &var, 100);
 
-	// 2. store current context in back and move control to ctx
-	swapcontext(&back, &ctx);
+  // 2. store current context in back and move control to ctx
+  swapcontext(&back, &ctx);
 
-	printf("var = %d\n", var); // 4. print
+  printf("var = %d\n", var); // 4. print
 }
 ```
 
@@ -249,19 +249,19 @@ typedef void *(*ccoroutine_function)(ccoroutine *coro, void *userdata);
 
 // coroutine handler
 struct ccoroutine {
-	ccoroutine_function 	function;		// 该协程要执行的函数
-	ucontext_t 		suspend_context;	// 挂起的上下文
-	ucontext_t 		resume_context;		// 当前执行的上下文
-	void 			*yield_value;		// 生成值
-	bool			is_finished;		// 协程是否已结束执行
+  ccoroutine_function  function;  // 该协程要执行的函数
+  ucontext_t   suspend_context; // 挂起的上下文
+  ucontext_t   resume_context;  // 当前执行的上下文
+  void    *yield_value;  // 生成值
+  bool   is_finished;  // 协程是否已结束执行
 };
 
 // apis
-ccoroutine	*ccoroutine_create(ccoroutine_function function, void* userdata);
-void		*ccoroutine_resume(ccoroutine *coro);
-void 		ccoroutine_yield(ccoroutine* coro, void *value);
-void		ccoroutine_destroy(ccoroutine* coro);
-bool		ccoroutine_finished(ccoroutine* coro);
+ccoroutine *ccoroutine_create(ccoroutine_function function, void* userdata);
+void  *ccoroutine_resume(ccoroutine *coro);
+void   ccoroutine_yield(ccoroutine* coro, void *value);
+void  ccoroutine_destroy(ccoroutine* coro);
+bool  ccoroutine_finished(ccoroutine* coro);
 
 #endif // CCOROUTINE_H_
 ```
@@ -275,49 +275,49 @@ bool		ccoroutine_finished(ccoroutine* coro);
 
 static void ccoroutine_entry_point(ccoroutine *coro, void* userdata)
 {
-	void *return_val		= coro->function(coro, userdata);
-	coro->is_finished		= true;
-	ccoroutine_yield(coro, return_val);
+  void *return_val  = coro->function(coro, userdata);
+  coro->is_finished  = true;
+  ccoroutine_yield(coro, return_val);
 }
 
 ccoroutine *ccoroutine_create(ccoroutine_function function, void* userdata)
 {
-	ccoroutine *coro = calloc(1, sizeof(*coro));
+  ccoroutine *coro = calloc(1, sizeof(*coro));
 
-	coro->is_finished			= false;
-	coro->function				= function;
-	coro->resume_context.uc_stack.ss_sp	= calloc(1, MINSIGSTKSZ);
-	coro->resume_context.uc_stack.ss_size	= MINSIGSTKSZ;
-	coro->resume_context.uc_link		= 0;
+  coro->is_finished   = false;
+  coro->function    = function;
+  coro->resume_context.uc_stack.ss_sp = calloc(1, MINSIGSTKSZ);
+  coro->resume_context.uc_stack.ss_size = MINSIGSTKSZ;
+  coro->resume_context.uc_link  = 0;
 
-	getcontext(&coro->resume_context);
-	makecontext(
-		&coro->resume_context, 
-		(void(*)()) ccoroutine_entry_point, 
-		2, 
-		coro,
-		userdata
-	);
-	return coro;
+  getcontext(&coro->resume_context);
+  makecontext(
+  &coro->resume_context, 
+  (void(*)()) ccoroutine_entry_point, 
+  2, 
+  coro,
+  userdata
+  );
+  return coro;
 }
 
 void *ccoroutine_resume(ccoroutine *coro)
 {
-	if (coro->is_finished) return (void*)-1;
-	swapcontext(&coro->suspend_context, &coro->resume_context);
-	return coro->yield_value;
+  if (coro->is_finished) return (void*)-1;
+  swapcontext(&coro->suspend_context, &coro->resume_context);
+  return coro->yield_value;
 }
 
 void ccoroutine_yield(ccoroutine *coro, void *value)
 {
-	coro->yield_value = value;
-	swapcontext(&coro->resume_context, &coro->suspend_context);
+  coro->yield_value = value;
+  swapcontext(&coro->resume_context, &coro->suspend_context);
 }
 
 void ccoroutine_destroy(ccoroutine *coro)
 {
-	free(coro->resume_context.uc_stack.ss_sp);
-	free(coro);
+  free(coro->resume_context.uc_stack.ss_sp);
+  free(coro);
 }
 ```
 
@@ -326,30 +326,30 @@ void ccoroutine_destroy(ccoroutine *coro)
 ```c
 void *hello_world(ccoroutine *coro, void *userdata)
 {
-	printf("%s\n", (char *)userdata);
-	ccoroutine_yield(coro, (void *)1);
-	printf("END: %s \n", (char *)userdata);
-	return (void *)2;
+  printf("%s\n", (char *)userdata);
+  ccoroutine_yield(coro, (void *)1);
+  printf("END: %s \n", (char *)userdata);
+  return (void *)2;
 }
 
 void ccoroutine_test()
 {
-	ccoroutine *coro = ccoroutine_create(hello_world, "hello from 1");
-	ccoroutine *coro2 = ccoroutine_create(hello_world, "hello from 2");
+  ccoroutine *coro = ccoroutine_create(hello_world, "hello from 1");
+  ccoroutine *coro2 = ccoroutine_create(hello_world, "hello from 2");
 
-	while (!ccoroutine_finished(coro) || !ccoroutine_finished(coro2)) {
-		ccoroutine_resume(coro);
-		ccoroutine_resume(coro2);
-	}
+  while (!ccoroutine_finished(coro) || !ccoroutine_finished(coro2)) {
+    ccoroutine_resume(coro);
+    ccoroutine_resume(coro2);
+  }
 
-	ccoroutine_destroy(coro);
-	ccoroutine_destroy(coro2);
+  ccoroutine_destroy(coro);
+  ccoroutine_destroy(coro2);
 }
 
 int main()
 {
-	ccoroutine_test();
-	return 0;
+  ccoroutine_test();
+  return 0;
 }
 ```
 
