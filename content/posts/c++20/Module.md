@@ -19,8 +19,6 @@ color = "" #color from the theme settings
 
 在模块未被引入之前，我们一般采用头文件，然而，这种方式存在以下几个问题：
 
-## 如何用使
-
 ### 声明一个模块
 
 ```cpp
