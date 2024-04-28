@@ -10,7 +10,7 @@ description = "对 io_uring 进行介绍与总结"
 showFullContent = false
 readingTime = false
 hideComments = false
-color = "orange" #color from the theme settings
+color = "black" #color from the theme settings
 +++
 
 SQ: Submission Queue，提交队列，用于存储将对其执行操作的数据。

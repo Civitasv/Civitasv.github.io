@@ -11,7 +11,7 @@ disqusShortname = "civitasv"
   contentTypeName = ""
 
   # ["orange", "blue", "red", "green", "pink"]
-  themeColor = "blue"
+  themeColor = "black"
   
   # ["light", "dark"]
   bg = "light"
@@ -68,32 +68,24 @@ disqusShortname = "civitasv"
 [languages]
   [languages.en]
     languageName = "English"
-    title = "C Resources"
-    subtitle = "My Learning On C Language"
+    title = "Thinking"
+    subtitle = "My Learning On Programming"
     owner = "Civitasv"
     keywords = "Blog"
     missingContentMessage = "Page not found..."
     missingBackButtonLabel = "Back to home page"
 
     [languages.en.params.logo]
-      logoText = "The C Language"
+      logoText = "Blog"
       logoHomeLink = "/"
 
     [languages.en.menu]
       [[languages.en.menu.main]]
-        identifier = "linux_driver"
-        name = "Driver"
+        identifier = "post"
+        name = "Post"
         url = "/"
+
       [[languages.en.menu.main]]
         identifier = "about"
         name = "About"
         url = "/about"
-      [[languages.en.menu.main]]
-        identifier = "unix_programming"
-        name = "Unix"
-        url = "/unix_programming"
-      [[languages.en.menu.main]]
-        identifier = "webserver"
-        name = "Webserver"
-        url = "/webserver"
-

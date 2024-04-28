@@ -1,10 +1,10 @@
 +++
 title = "ch03: 文件 I/O"
 date = "2023-05-16T11:01:38+08:00"
-author = ""
+author = "Civitasv"
 authorTwitter = "" #do not include @
 cover = ""
-tags = ["unix", "i/o"]
+tags = ["unix", "IO"]
 keywords = ["unix", "笔记"]
 description = "Unix 文件 I/O 相关函数记录"
 showFullContent = false
