@@ -272,16 +272,6 @@ namespace ns // ns is not attached to lib_A.
 // in a traditional source file).
 ```
 
-## 性能比较
-
-### 实验环境
-
-本实验使用 `Clang 17.0.6 arm64-apple-darwin23.1.0` 编译器，测试 Modules 相比传统 `#include` 方式的性能。
-
-### 测试代码
-
-TODO
-
 ## Reference
 
 1. [Modules](https://en.cppreference.com/w/cpp/language/modules)
