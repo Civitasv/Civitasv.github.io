@@ -42,6 +42,32 @@ int range_example() {
 }
 ```
 
+## Good Resources
+
+> C++ 20's Ranges: A Quick Start:
+
+{{< youtube sZy9XcGHmI4 >}}
+
+> A Simple String Split in C++:
+
+{{< youtube V14xGZAyVKI>}}
+
+```cpp
+constexpr auto Split(const std::string_view &str) {
+  auto split_strings = str | std::ranges::views::split(' ');
+  return split_strings;
+}
+
+int main(int argc, char **argv) {
+  range_example();
+  for (const auto &str : Split("hello world")) {
+    std::cout << std::string_view{str.begin(), str.end()} << '\n';
+  }
+
+  return 0;
+}
+```
+
 ## Reference
 
 1. [Ranges](https://en.cppreference.com/w/cpp/ranges)
